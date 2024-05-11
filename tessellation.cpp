@@ -11,6 +11,7 @@ int main()
     float distance;
     int numVertices;
     float pixMove;
+    float x1,y1,x2,y2;
 
     cout << "Vertices: ";
     cin >> numVertices;
@@ -28,8 +29,27 @@ int main()
         cin >> curVertices[i][1];
     }
 
-    distance = getDistance(curVertices[0][0],curVertices[0][1],curVertices[1][0],curVertices[1][1]);
-    cout << (pixMove/distance) << endl;
+    for(int j = 0; j < numVertices; j++)
+    {
+        if((j+1) < numVertices)
+        {
+            x1 = curVertices[j][0];
+            y1 = curVertices[j][1];
+            x2 = curVertices[j+1][0];
+            y2 = curVertices[j+1][1];
+        }
+        else
+        {
+            x1 = curVertices[j][0];
+            y1 = curVertices[j][1];
+            x2 = curVertices[0][0];
+            y2 = curVertices[0][1];
+        }
+        nextVertices[j][0] = getX(x1,y1,x2,y2,pixMove);
+        nextVertices[j][1] = getY(x1,y1,x2,y2,pixMove);
+
+        cout << "(" << nextVertices[j][0] << " , " << nextVertices[j][1] << ")" << endl;
+    }
 
     return 0;
 }
@@ -43,14 +63,18 @@ float getDistance(float x1, float y1, float x2, float y2)
 
 float getX(float x1, float y1, float x2, float y2, float pixMove)
 {
-    float x;
+    float distance = getDistance(x1,y1,x2,y2);
+    float scale = (pixMove/distance); // percentage
+    float x = x1+(scale*(x2-x1));
 
     return x;
 }
 
 float getY(float x1, float y1, float x2, float y2, float pixMove)
 {
-    float y;
+    float distance = getDistance(x1,y1,x2,y2);
+    float scale = (pixMove/distance); // percentage
+    float y = y1+(scale*(y2-y1));
 
     return y;
 }
