@@ -62,7 +62,7 @@ int main()
             if((j+1) < numVertices)
                 polygon += " ";
             else
-                polygon += "\" ";
+                polygon += "\"";
         }
 
         polygon += " stroke=\"white\" fill=\"none\" stroke-width=\"1\"/>";
