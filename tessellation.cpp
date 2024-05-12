@@ -1,5 +1,7 @@
 #include <cmath>
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 float getDistance(float,float,float,float);
@@ -12,6 +14,7 @@ int main()
     int numVertices;
     float pixMove;
     float x1,y1,x2,y2;
+    string polygon = "<polygon points=\"";
 
     cout << "Vertices: ";
     cin >> numVertices;
@@ -48,8 +51,18 @@ int main()
         nextVertices[j][0] = getX(x1,y1,x2,y2,pixMove);
         nextVertices[j][1] = getY(x1,y1,x2,y2,pixMove);
 
-        cout << "(" << nextVertices[j][0] << " , " << nextVertices[j][1] << ")" << endl;
+        polygon += to_string(nextVertices[j][0]);
+        polygon += ",";
+        polygon += to_string(nextVertices[j][1]);
+        if((j+1) < numVertices)
+            polygon += " ";
+        else
+            polygon += "\" ";
     }
+
+    polygon += " stroke=\"white\" fill=\"none\" stroke-width=\"1\"/>";
+
+    cout << polygon << endl;
 
     return 0;
 }
